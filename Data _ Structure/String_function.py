@@ -85,6 +85,7 @@ print("isdecimal() : ","12345a".isdecimal())
 # isdigit(): includes decimal digits plus digits like superscript ² (²), and some Unicode digits.
 print("isdigit() : ","12345².".isdigit())
 
+
 #isnumeric(): includes decimal characters, digits, and fractions
 print("isnumeric() : ","12345².".isnumeric())
 
@@ -104,27 +105,52 @@ print("isprintable(): ",a.isprintable())
 print("replace(old, new) : ",a.replace("l","L"))
 print("replace(old, new, count) : ",a.replace("l","@@",2))
 
+a="Hello World"
+# split(separator, maxsplit):breaks down a string into a list of substrings using a chosen separator.
+print("split(separator) : ",a.split())
+print("split(separator, maxsplit) : ",a.split("l"))
+print("split(separator, maxsplit) : ",a.split("l",2))
 
-# print(a.split("'ß'"))
-# print(a.split("l"))
-# print(a.split("l",2))
-# print(a.partition("l"))
-# print("abc@gmail@.com".partition("@"))
-# print("abc@gmail@.com".rpartition("@")
+# rsplit(separator, maxsplit):breaks down a string into a list of substrings using a chosen separator,starting from the right.
+print("rsplit(separator) : ",a.rsplit())
+print("rsplit(separator, maxsplit) : ",a.rsplit("l"))
 
-print("Shital".rjust(20))
-print("Shital".rjust(20,'*'))
-print("Shital".ljust(20))
-print("Shital".ljust(20,'*'))
-print("      Shital       ")
-print("           Shital       ".strip())
-print("ShiStalS".strip('S'))
-print("    ShiStalS".lstrip())
-print("ShiStalS".lstrip("S"))
-print("ShiStalS      ".rstrip())
-print("ShiStalS".rstrip("S"))
-print("_python_".join("Shital"))
-print("python".zfill(20))
+# partition(separator): splits a string into three parts: the part before the separator, the separator itself, and the part
+print(a.partition("l"))
+print("abc@gmail@.com".partition("@"))
+
+# rpartition(separator): splits a string into three parts,starting from the right.
+print("abc@gmail@.com".rpartition("@"))
+
+
+# join(iterable): joins elements of an iterable (like a list or tuple) into a single string,using the string as a separator.
+print("_python_".join("Python"))
+print("$_".join("Python"))
+
+# strip(chars): removes leading and trailing characters (default is whitespace) from a string.
+print("      Python       ")
+print("           Python       ".strip())
+print("sPythonsss".strip('s'))
+
+# lstrip(chars): removes leading characters (default is whitespace) from a string.
+print("    Pythonsss".lstrip())
+print("Pythonsss".lstrip("S"))
+
+# rstrip(chars): removes trailing characters (default is whitespace) from a string.
+print("Pythonsss      ".rstrip())
+print("Pythonsss".rstrip("S"))
+
+# rjust(width, fillchar): right-justifies a string within a specified width,using a fill character (default is space).
+print("Python".rjust(20))
+print("Python".rjust(20,'*'))
+# ljust(width, fillchar): left-justifies a string within a specified width,using a fill character (default is space).
+print("Python".ljust(20))
+print("Python".ljust(20,'*'))
+
+# zfill(width): pads a numeric string with zeros on the left,up to a specified width.
+print("zfill(width):","python".zfill(20))
+
+# translate(table): replaces characters in a string based on a translation table created by str.maketrans().
 a="python"
 b=str.maketrans('y','@')
 print(b)
@@ -135,9 +161,7 @@ print(b)
 print(a.translate(b))
 print(a.isprintable())
 
-# print("Ståle".encode(encoding="ascii",errors="replace"))
-# print(b.encode(encoding="ascii",errors="replace"))
-# print(b.encode(encoding="ascii",errors="backslashreplace"))
+# expandtabs(tabsize): replaces tab characters with spaces,using a specified tab size.
 
 a= "H\te\tl\tl\to"
 print(a)
@@ -145,3 +169,27 @@ print("expandtabs(): ",a.expandtabs())
 print("expandtabs(tabsize): ",a.expandtabs(2))
 print("expandtabs(tabsize): ",a.expandtabs(4))
 print("expandtabs(tabsize): ",a.expandtabs(10))
+
+
+
+#encode(encoding, errors): encodes a string into bytes using a specified encoding and error handling scheme.
+text = "pythón"
+print(text.encode('utf-8'))  # Output: b'pyth\xc3\xb3'
+
+print(text.encode('ascii'))  # Raises UnicodeEncodeError       
+
+
+# Ignore non-ASCII
+print(text.encode('ascii', errors='ignore'))  # b'pythn'
+
+# Replace non-ASCII
+print(text.encode('ascii', errors='replace'))  # b'pyth?n'
+
+# 'xmlcharrefreplace' (replaces with XML character reference)
+print(text.encode('ascii', errors='xmlcharrefreplace')) # b'pyth&#243;
+
+# 'backslashreplace' (replaces with Python-style Unicode escape)
+print(text.encode('ascii', errors='backslashreplace')) # Output: b'pyth\\xf3'
+
+# 'namereplace' (Python 3.5+ — replaces with \N{...} names)
+print(text.encode('ascii', errors='namereplace'))  # Output: b'pyth\\N{LATIN SMALL LETTER O WITH ACUTE}'
